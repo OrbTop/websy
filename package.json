@@ -1,0 +1,21 @@
+{
+  "name": "websy",
+  "version": "1.0.0",
+  "description": "CLI tool to automate Apify Actor setup & management",
+  "type": "module",
+  "main": "src/Websy.mjs",
+  "bin": {
+    "websy": "src/Websy.mjs"
+  },
+  "scripts": {
+    "start": "node src/Websy.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BowTiedRacoon",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "got": "^14.4.5",
+    "js-yaml": "^4.1.0"
+  }
+}

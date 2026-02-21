@@ -1,0 +1,135 @@
+
+
+# this is a configuration for Websy CLI tool
+# the goal is to configure as many manual steps as possible
+
+# VALID_CATEGORIES:
+# 'AI', 'AGENTS', 'AUTOMATION', 'BUSINESS', 'COVID_19', 'DEVELOPER_EXAMPLES', 'DEVELOPER_TOOLS', 'ECOMMERCE',
+# 'FOR_CREATORS', 'GAMES', 'JOBS', 'LEAD_GENERATION', 'MARKETING', 'NEWS', 'SEO_TOOLS', 'SOCIAL_MEDIA',
+# 'TRAVEL', 'VIDEOS', 'REAL_ESTATE', 'SPORTS', 'EDUCATION', 'INTEGRATIONS', 'OTHER', 'OPEN_SOURCE', 'MCP_SERVERS'
+# MARKETING -> no longer active!
+
+
+actor_details:
+  title: ""
+  description: ""
+  categories: 
+    - "LEAD_GENERATION"
+    - "JOBS"
+    - "AUTOMATION"
+  defaultRunOptions: 
+    build: "latest"
+    memoryMbytes: 256
+    timeoutSecs: 7200
+  isPublic: false
+  notice: "NONE" # force remove maintenance notice
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCHEMAS - generates .actor/*.json files
+# ─────────────────────────────────────────────────────────────────────────────
+schemas:
+  actor:
+    name: 
+    version: "0.1"
+    build_tag: latest
+
+  input:
+    fields:
+      maxItems:
+        title: Max Items
+        type: integer
+        description: "Maximum number of themes to scrape"
+        prefill: 10
+      
+      do_fetch_reviews:
+        title: Fetch Reviews
+        type: boolean
+        description: "Whether to fetch user reviews (premium feature)"
+        prefill: false
+        group: reviews
+    
+    required:
+      - maxItems
+
+  dataset:
+    fields:
+      themeId:
+        desc: "Unique theme identifier from URL"
+      name:
+        desc: "Theme name"
+      price:
+        type: number
+        desc: "Price in USD (0 for free themes)"
+      priceText:
+        desc: "Formatted price string"
+      description:
+        desc: "Theme description"
+      designer:
+        desc: "Theme designer/developer name"
+      features:
+        desc: "List of theme features"
+        array: true
+      ratingPercent:
+        type: number
+        desc: "Positive rating percentage"
+      reviewCount:
+        type: number
+        desc: "Total number of reviews"
+      presets:
+        desc: "Available theme presets/variants"
+        array: true
+      publisherAddress:
+        desc: "Designer contact address"
+      publisherEmail:
+        desc: "Designer contact email"
+      versionNumber:
+        desc: "Theme version number"
+      releaseDate:
+        desc: "Theme release date"
+      link:
+        desc: "URL to theme page"
+      imageUrl:
+        desc: "Theme preview image URL"
+      scrapedAt:
+        desc: "Timestamp when data was scraped"
+
+    field_groups:
+      reviews:
+        reviews:
+          desc: "Array of user reviews (when do_fetch_reviews is enabled)"
+          array: true
+          # Note: Each review contains: reviewerName, reviewDate, reviewText, designerReply
+
+    views:
+      overview:
+        title: Overview
+        fields:
+          - name
+          - designer
+          - price
+          - ratingPercent
+          - reviewCount
+          - link
+      
+      detailed:
+        title: Detailed View
+        fields:
+          - themeId
+          - name
+          - designer
+          - price
+          - priceText
+          - description
+          - features
+          - ratingPercent
+          - reviewCount
+          - presets
+          - publisherEmail
+          - versionNumber
+          - releaseDate
+          - link
+          - imageUrl
+
+  output:
+    title: ""
