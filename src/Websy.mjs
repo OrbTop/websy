@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Websy.mjs
 import got from 'got';
 import fs from 'fs';
